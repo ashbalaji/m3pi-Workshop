@@ -3,11 +3,9 @@
  
 m3pi m3pi;
  
-// Minimum and maximum motor speeds
-#define MAX 0.20
+#define MAX 0.2
 #define MIN 0
- 
-// PID terms
+
 #define P_TERM 1
 #define I_TERM 0
 #define D_TERM 20
@@ -15,36 +13,55 @@ m3pi m3pi;
 int main() {
  
     m3pi.locate(0,1);
-    m3pi.printf("Shortest");
- 
+    m3pi.printf("Shortest Path");
     wait(2.0);
- 
+    m3pi.cls();
     m3pi.sensor_auto_calibrate();
  
-    //float right;
-    //float left;
-    float curr = 0.0;
-   
+    float right;
+    float left;
+    float current_pos_of_line = 0.0;
+    float previous_pos_of_line = 0.0;
+    float derivative,proportional,integral = 0;
+    float power;
+    int turn=1;
     float speed = MAX;
-    int count=0;
+        
     while (1) {
+                   
+        current_pos_of_line = m3pi.line_position();        
+        proportional = current_pos_of_line;
+        derivative = current_pos_of_line - previous_pos_of_line;
+          
+        if(current_pos_of_line>0.5 || current_pos_of_line<-0.5)
+        {      
+            while((turn==1 || turn==2 || turn==4) && (m3pi.line_position()>0.5 || m3pi.line_position()<-0.5))
+               m3pi.right(0.2);
+            while((turn==3) && (m3pi.line_position()>0.5 || m3pi.line_position()<-0.5))
+               m3pi.left(0.2);
+            turn=turn+1;  
+        }
+                  
+       
+        integral += proportiona      
+        previous_pos_of_line = current_pos_of_line;
+        power = (proportional * (P_TERM) ) + (integral*(I_TERM)) + (derivative*(D_TERM)) ;
+        right = speed+power;
+        left  = speed-power;
+               
+        if (right < MIN)
+            right = MIN;
+        else if (right > MAX)
+            right = MAX;
+            
+        if (left < MIN)
+            left = MIN;
+        else if (left > MAX)
+            left = MAX;
+         
+        m3pi.left_motor(left);
+        m3pi.right_motor(right);
         
-        curr=m3pi.line_position();
-        
-        if(curr<0.3 && curr>-0.3)
-             m3pi.forward(speed);
-        else
-        { if((count-count/2)==0)
-           while(m3pi.line_position()>0.1)
-             { m3pi.right_motor(speed);
-               m3pi.left_motor(-speed);
-             }
-          else
-           while(m3pi.line_position()<-0.1)
-             { m3pi.right_motor(-speed);
-               m3pi.left_motor(speed);
-             }     
-          count=count+1;
-        }          
+         
     }
 }
