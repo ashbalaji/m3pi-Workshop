@@ -11,7 +11,7 @@ int main() {
     m3pi.cls();
     
    
-    m3pi.right(0.5);
+    m3pi.right_motor(0.5);
     
     wait(5.0);
     m3pi.stop();       
