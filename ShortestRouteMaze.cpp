@@ -43,7 +43,7 @@ int main() {
         }
                   
        
-        integral += proportiona      
+        integral += proportional;      
         previous_pos_of_line = current_pos_of_line;
         power = (proportional * (P_TERM) ) + (integral*(I_TERM)) + (derivative*(D_TERM)) ;
         right = speed+power;
