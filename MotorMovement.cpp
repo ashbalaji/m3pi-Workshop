@@ -5,7 +5,7 @@ m3pi m3pi;
  
 int main() {
  
-    m3pi.printf("Hi World");
+    m3pi.printf("MOTORing");
  
     wait (2.0);
     m3pi.cls();
