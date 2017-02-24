@@ -11,7 +11,7 @@ int main() {
     float threshold = 0.5;
  
     m3pi.locate(0,1);
-    m3pi.printf("Line Flw");
+    m3pi.printf("Basic LF");
  
     wait(2.0);
     
