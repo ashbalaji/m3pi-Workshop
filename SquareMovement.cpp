@@ -5,29 +5,12 @@ m3pi m3pi;
  
 int main() {
  
-    m3pi.printf("Hi World");
- 
+    m3pi.printf("Square");
     wait (2.0);
     m3pi.cls();
-    
-    m3pi.forward(0.2); 
-    wait (1.0);        
-    m3pi.left(0.2);
-    m3pi.right(-0.2);    
-    wait (0.32);   
-    m3pi.forward(0.2); 
-    wait (1.0);        
-    m3pi.left(0.2);
-    m3pi.right(-0.2);    
-    wait (0.32);      
-    m3pi.forward(0.2); 
-    wait (1.0);        
-    m3pi.left(0.2);    
-    m3pi.right(-0.2);    
-    wait (0.32);        
-    m3pi.forward(0.2); 
-    wait (1.0);       
- 
+   
+    //Include code to make the m3pi move in a square
+    //Hint: Moving forward for some time and then moving left for some time makes your robot move along the legs of a right angle triangle
     
     m3pi.stop();       
 }
