@@ -15,7 +15,7 @@ m3pi m3pi;
 int main() {
  
     m3pi.locate(0,1);
-    m3pi.printf("Line PID");
+    m3pi.printf("Gap");
  
     wait(2.0);
  
