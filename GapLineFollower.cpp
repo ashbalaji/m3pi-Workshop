@@ -30,35 +30,24 @@ int main() {
     float speed = MAX;
     
     while (1) {
- 
-        // Get the position of the line.
+       
         current_pos_of_line = m3pi.line_position();        
         proportional = current_pos_of_line;
         
-        if(m3pi.line_position()==-1)
-        { while(m3pi.line_position()!=1)
-          { m3pi.right_motor(speed);
-            m3pi.left_motor(-speed);
-            
-          }  
-        }
-        // Compute the derivative
+        //Add in code to make your robot to continue following the line even if there are gaps
+        //Hint: Navigating a gap is same as coming back on to the track once the m3pi stops sensing a line
+     
         derivative = current_pos_of_line - previous_pos_of_line;
         
-        // Compute the integral
         integral += proportional;
         
-        // Remember the last position.
         previous_pos_of_line = current_pos_of_line;
         
-        // Compute the power
         power = (proportional * (P_TERM) ) + (integral*(I_TERM)) + (derivative*(D_TERM)) ;
         
-        // Compute new speeds   
         right = speed+power;
         left  = speed-power;
         
-        // limit checks
         if (right < MIN)
             right = MIN;
         else if (right > MAX)
@@ -69,7 +58,6 @@ int main() {
         else if (left > MAX)
             left = MAX;
             
-       // set speed 
         m3pi.left_motor(left);
         m3pi.right_motor(right);
  
